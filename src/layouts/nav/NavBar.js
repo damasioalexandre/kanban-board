@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
-import {Link, IndexLink} from 'react-router';
+import {IndexLink} from 'react-router';
 import {LinkContainer} from 'react-router-bootstrap';
 
 class NavbarInstance extends Component {
