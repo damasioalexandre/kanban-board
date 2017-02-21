@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {apiUrl} from '../../constants/api';
 import Jquery from 'jquery';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 /*components*/
 import Lane from './Lane';
@@ -53,4 +55,4 @@ class Board extends Component {
     }
 }
 
-export default Board;
+export default DragDropContext(HTML5Backend)(Board);

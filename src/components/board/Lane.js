@@ -1,7 +1,21 @@
 import React, {Component, PropTypes} from 'react';
-
-/*components*/
 import Card from './Card';
+import {ItemTypes} from '../../constants/ItemTypes';
+import {DropTarget} from 'react-dnd';
+
+const laneTarget = {
+    drop(props) {
+        return { id: props.id };
+    }
+};
+
+function collect(connect, monitor) {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver(),
+        canDrop: monitor.canDrop()
+    };
+}
 
 class Lane extends Component {
     renderCard(card, key) {
@@ -14,12 +28,14 @@ class Lane extends Component {
     }
 
     render() {
+        // If cards exist then render them
         if (this.props.cards) {
+            const { connectDropTarget, isOver, children } = this.props;
             const cards = [];
             this.props.cards.map(function (card, index) {
                 cards.push(this.renderCard(card, index));
             }.bind(this));
-            return (
+            return connectDropTarget(
                 <div className="kanban-lane col-md-4 col-sm-4 col-xs-4">
                     <div className="panel panel-default">
                         <div className="panel-heading">
@@ -32,11 +48,6 @@ class Lane extends Component {
                 </div>
             );
         }
-        return (
-            <div>
-                <button>Add a card</button>
-            </div>
-        )
     }
 }
 
@@ -44,7 +55,8 @@ Lane.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     boardId: PropTypes.number.isRequired,
-    cards: PropTypes.array
+    cards: PropTypes.array,
+    isOver: PropTypes.bool.isRequired,
 };
 
-export default Lane;
+export default DropTarget(ItemTypes.CARD, laneTarget, collect)(Lane);
