@@ -1,4 +1,12 @@
-.test{
-  background-color: blue;
-  color: red;
+/* Card Styling */
+.kanban-lane {
+  .kanban-card {
+    transition: all .3s;
+    color: #0143A3;
+    &:hover {
+      box-shadow: 0 4px 4px rgba(1, 67, 163, .24), 0 0 4px rgba(1, 67, 163, .12), 0 6px 18px rgba(17, 103, 155, 0.12);
+      transform: translate3d(0, -2px, 0);
+      transition: all .3s;
+    }
+  }
 }

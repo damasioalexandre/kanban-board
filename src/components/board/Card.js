@@ -4,6 +4,7 @@ import {DragSource} from 'react-dnd';
 // @TODO remove these imports
 import Jquery from 'jquery';
 import {apiUrl} from '../../constants/api';
+import CardModal from '../../components/general/CardModal'
 
 const cardSource = {
     beginDrag(props) {
@@ -33,7 +34,7 @@ const cardSource = {
             })
                 .done(function (result) {
                     console.log("success 2");
-                }.bind(this))
+                })
                 .fail(function (status) {
                     console.log('error');
                 });
@@ -58,7 +59,6 @@ class Card extends Component {
         return connectDragSource(
             <div className="panel kanban-card">
                 <div className="panel-body">
-                    hello
                     {this.props.title}
                 </div>
             </div>

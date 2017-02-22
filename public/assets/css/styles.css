@@ -1,2 +1,18 @@
-.test {
-  background-color: blue; }
+/*Card */
+.kanban-lane {
+  /*.career-link-wrapper{
+    text-decoration: none;
+    color: #000;
+    &:hover{
+      .career-title{
+        color: $assemble-blue;
+      }
+    }
+  }*/ }
+  .kanban-lane .kanban-card {
+    transition: all .3s;
+    color: #0143A3; }
+    .kanban-lane .kanban-card:hover {
+      box-shadow: 0 4px 4px rgba(1, 67, 163, 0.24), 0 0 4px rgba(1, 67, 163, 0.12), 0 6px 18px rgba(17, 103, 155, 0.12);
+      transform: translate3d(0, -2px, 0);
+      transition: all .3s; }

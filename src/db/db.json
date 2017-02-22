@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Card 1",
       "description": "Card 1 Description",
-      "laneId": 2,
+      "laneId": 3,
       "users": [
         1,
         3
@@ -18,7 +18,7 @@
       "id": 2,
       "title": "Card 2",
       "description": "Card 2 Description",
-      "laneId": 1,
+      "laneId": 3,
       "users": [
         1,
         3
@@ -32,7 +32,7 @@
       "id": 3,
       "title": "Card 3",
       "description": "Card 3 Description",
-      "laneId": 3,
+      "laneId": 2,
       "users": [
         1
       ],
@@ -42,7 +42,7 @@
       "id": 4,
       "title": "Card 4",
       "description": "Card 4 Description",
-      "laneId": 3,
+      "laneId": 1,
       "users": [
         1
       ],
