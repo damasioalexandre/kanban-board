@@ -59,6 +59,7 @@ class Card extends Component {
         this.state = {showModal: false};
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
+        this.updateCard = this.updateCard.bind(this);
     }
 
     close() {
@@ -71,6 +72,27 @@ class Card extends Component {
         this.setState({showModal: true});
     }
 
+    updateCardProps(card) {
+
+    }
+
+    updateCard(updatedCard) {
+        /*console.log('card before update: ', updatedCard);*/
+        Jquery.ajax({
+            url: apiUrl + "cards/" + this.props.id,
+            type: "PUT",
+            dataType: "json",
+            data: updatedCard
+        })
+            .done(function (result) {
+                this.setState({showModal: false});
+                this.updateCardProps(result);
+            }.bind(this))
+            .fail(function (status) {
+                console.log('error');
+            });
+    }
+
     render() {
         const {connectDragSource, isDragging} = this.props;
         return connectDragSource(
@@ -80,7 +102,8 @@ class Card extends Component {
                         {this.props.title}
                     </div>
                 </div>
-                {this.state.showModal ? <CardModal close={this.close}/> : null}
+                {this.state.showModal ?
+                    <CardModal close={this.close} card={this.props} updateCard={this.updateCard}/> : null}
             </div>
         );
     }
