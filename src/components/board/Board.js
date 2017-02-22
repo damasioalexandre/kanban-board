@@ -19,7 +19,6 @@ class Board extends Component {
     }
 
     setAllData() {
-        console.log('getting data');
         Jquery.ajax({
             url: apiUrl + "lanes?_embed=cards",
             type: "GET",
@@ -39,7 +38,6 @@ class Board extends Component {
     addCard(targetLane, card) {
         /*this.setAllData(function () {}.bind(this));*/
         let newLanes = this.state.lanes;
-        console.log('lanes before add ', this.state.lanes);
         newLanes.forEach(function (lane) {
             if (lane.id === targetLane.id) {
                 lane.cards.push(card);
@@ -47,7 +45,6 @@ class Board extends Component {
         });
 
         this.setState({lanes: newLanes});
-        console.log('lanes after add ', this.state.lanes);
     }
 
     renderLane(lane, key) {

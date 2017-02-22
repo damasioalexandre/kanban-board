@@ -34,7 +34,7 @@ const cardSource = {
                 data: data
             })
                 .done(function (result) {
-                    console.log("success 2");
+
                 })
                 .fail(function (status) {
                     console.log('error');
@@ -63,12 +63,10 @@ class Card extends Component {
     }
 
     close() {
-        console.log('closing');
         this.setState({showModal: false});
     }
 
     open() {
-        console.log('opening');
         this.setState({showModal: true});
     }
 
@@ -86,10 +84,9 @@ class Card extends Component {
             .done(function (result) {
                 this.setState({showModal: false});
                 /*this.updateCardProps(result);*/
-                console.log('After card update', result)
             }.bind(this))
             .fail(function (status) {
-                console.log('error');
+
             });
     }
 

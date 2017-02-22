@@ -3,7 +3,6 @@ import {Modal, Button, FormGroup, ControlLabel, FormControl} from 'react-bootstr
 
 class CardModal extends Component {
     constructor(props) {
-        console.log('constructing');
         super(props);
         this.state = {
             showModal: true,
