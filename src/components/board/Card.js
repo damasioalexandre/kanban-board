@@ -1,10 +1,11 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react';
 import {ItemTypes} from '../../constants/ItemTypes';
 import {DragSource} from 'react-dnd';
 // @TODO remove these imports
 import Jquery from 'jquery';
 import {apiUrl} from '../../constants/api';
-import CardModal from '../../components/general/CardModal'
+//
+import CardModal from '../../components/general/CardModal';
 
 const cardSource = {
     beginDrag(props) {
@@ -40,7 +41,6 @@ const cardSource = {
                 });
 
             props.removeCard(props.id);
-
             target.lane.addCard(target.lane, source.card);
         }
     },
@@ -54,13 +54,33 @@ function collect(connect, monitor) {
 }
 
 class Card extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {showModal: false};
+        this.open = this.open.bind(this);
+        this.close = this.close.bind(this);
+    }
+
+    close() {
+        console.log('closing');
+        this.setState({showModal: false});
+    }
+
+    open() {
+        console.log('opening');
+        this.setState({showModal: true});
+    }
+
     render() {
         const {connectDragSource, isDragging} = this.props;
         return connectDragSource(
-            <div className="panel kanban-card">
-                <div className="panel-body">
-                    {this.props.title}
+            <div>
+                <div className="panel kanban-card">
+                    <div className="panel-body" onClick={this.open}>
+                        {this.props.title}
+                    </div>
                 </div>
+                {this.state.showModal ? <CardModal close={this.close}/> : null}
             </div>
         );
     }

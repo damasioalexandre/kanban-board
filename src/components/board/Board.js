@@ -3,7 +3,6 @@ import {apiUrl} from '../../constants/api';
 import Jquery from 'jquery';
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import CardModal from '../../components/general/CardModal';
 
 /*components*/
 import Lane from './Lane';
