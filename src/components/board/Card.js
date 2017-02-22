@@ -14,15 +14,15 @@ const cardSource = {
     endDrag(props, monitor) {
         const source = monitor.getItem();
         const target = monitor.getDropResult();
-        let data = {
-            "id": 555,
-            "title": props.title,
-            "description": props.description,
-            "laneId": 2,
-            "users": props.users
-        };
-        console.log(data);
+        //@TODO fix null + undefined check
         if (source.id && target.id) {
+            let data = {
+                "id": 555,
+                "title": props.title,
+                "description": props.description,
+                "laneId": target.id,
+                "users": props.users
+            };
             Jquery.ajax({
                 url: apiUrl + "cards/" + source.id,
                 type: "PATCH",
