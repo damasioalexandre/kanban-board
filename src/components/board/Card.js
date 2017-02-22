@@ -72,12 +72,11 @@ class Card extends Component {
         this.setState({showModal: true});
     }
 
-    updateCardProps(card) {
+    /*updateCardProps(card) {
 
-    }
+    }*/
 
     updateCard(updatedCard) {
-        /*console.log('card before update: ', updatedCard);*/
         Jquery.ajax({
             url: apiUrl + "cards/" + this.props.id,
             type: "PUT",
@@ -86,7 +85,8 @@ class Card extends Component {
         })
             .done(function (result) {
                 this.setState({showModal: false});
-                this.updateCardProps(result);
+                /*this.updateCardProps(result);*/
+                console.log('After card update', result)
             }.bind(this))
             .fail(function (status) {
                 console.log('error');
@@ -114,6 +114,7 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     laneId: PropTypes.number,
+    laneTitle: PropTypes.string.isRequired,
     users: PropTypes.array,
     removeCard: PropTypes.func.isRequired,
 

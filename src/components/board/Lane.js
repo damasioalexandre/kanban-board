@@ -39,7 +39,7 @@ class Lane extends Component {
             <div key={key}>
                 <Card id={card.id} title={card.title} description={card.description} laneId={card.laneId}
                       removeCard={this.removeCard}
-                      users={card.users}/>
+                      users={card.users} laneTitle={this.props.title}/>
             </div>
         )
     }
