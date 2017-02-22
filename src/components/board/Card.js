@@ -8,19 +8,22 @@ import {apiUrl} from '../../constants/api';
 const cardSource = {
     beginDrag(props) {
         return {
-            id: props.id
+            id: props.id,
+            removeCard: props.removeCard,
+            card: props,
+            addCard: props.addCard
         };
     },
     endDrag(props, monitor) {
         const source = monitor.getItem();
         const target = monitor.getDropResult();
         //@TODO fix null + undefined check
-        if (source.id && target.id) {
+        if (source.id && target.lane.id) {
             let data = {
                 "id": 555,
                 "title": props.title,
                 "description": props.description,
-                "laneId": target.id,
+                "laneId": target.lane.id,
                 "users": props.users
             };
             Jquery.ajax({
@@ -33,7 +36,11 @@ const cardSource = {
                 }.bind(this))
                 .fail(function (status) {
                     console.log('error');
-                })
+                });
+
+            props.removeCard(props.id);
+
+            target.lane.addCard(target.lane, source.card);
         }
     },
 };
@@ -65,6 +72,7 @@ Card.propTypes = {
     description: PropTypes.string,
     laneId: PropTypes.number,
     users: PropTypes.array,
+    removeCard: PropTypes.func.isRequired,
 
     /*dnd props*/
     connectDragSource: PropTypes.func.isRequired,

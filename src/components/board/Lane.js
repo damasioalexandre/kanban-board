@@ -5,7 +5,7 @@ import {DropTarget} from 'react-dnd';
 
 const laneTarget = {
     drop(props) {
-        return { id: props.id };
+        return {lane: props};
     }
 };
 
@@ -18,10 +18,27 @@ function collect(connect, monitor) {
 }
 
 class Lane extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            cards: props.cards
+        };
+        this.removeCard = this.removeCard.bind(this);
+    }
+
+    removeCard(cardId) {
+        let cards = this.state.cards.filter(function (card) {
+            return card.id !== cardId;
+        });
+        this.setState({cards: cards});
+    }
+
     renderCard(card, key) {
         return (
             <div key={key}>
                 <Card id={card.id} title={card.title} description={card.description} laneId={card.laneId}
+                      removeCard={this.removeCard}
                       users={card.users}/>
             </div>
         )
@@ -29,10 +46,10 @@ class Lane extends Component {
 
     render() {
         // If cards exist then render them
-        if (this.props.cards) {
-            const { connectDropTarget, isOver, children } = this.props;
+        if (this.state.cards) {
+            const {connectDropTarget, isOver, children} = this.props;
             const cards = [];
-            this.props.cards.map(function (card, index) {
+            this.state.cards.map(function (card, index) {
                 cards.push(this.renderCard(card, index));
             }.bind(this));
             return connectDropTarget(
@@ -56,7 +73,8 @@ Lane.propTypes = {
     title: PropTypes.string.isRequired,
     boardId: PropTypes.number.isRequired,
     cards: PropTypes.array,
-    isOver: PropTypes.bool.isRequired,
+    isOver: PropTypes.bool,
+    addCard: PropTypes.func.isRequired
 };
 
 export default DropTarget(ItemTypes.CARD, laneTarget, collect)(Lane);
