@@ -17,7 +17,7 @@ class CardModal extends Component {
     getValidationState() {
         const length = this.state.card.title.length;
         if (length > 10) return 'success';
-        else if (length > 5) return 'warning';
+        else if (length > 3) return 'warning';
         else if (length > 0) return 'error';
     }
 

@@ -47,9 +47,19 @@
       "title": "Card 5",
       "description": "Card 5 Description",
       "estimate": 0,
-      "laneId": null,
+      "laneId": 4,
       "users": [
         1
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Card 6",
+      "description": "Card 6 Description",
+      "estimate": 0,
+      "laneId": 4,
+      "users": [
+        2
       ]
     }
   ],
@@ -62,16 +72,21 @@
   "lanes": [
     {
       "id": 1,
-      "title": "To Do",
+      "title": "Backlog",
       "boardId": 1
     },
     {
       "id": 2,
-      "title": "In progress",
+      "title": "To Do",
       "boardId": 1
     },
     {
       "id": 3,
+      "title": "In Progress",
+      "boardId": 1
+    },
+    {
+      "id": 4,
       "title": "Done",
       "boardId": 1
     }

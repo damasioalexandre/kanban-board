@@ -18,10 +18,6 @@ class NavbarInstance extends Component {
                         <LinkContainer to="/board">
                             <NavItem eventKey={1}>Board</NavItem>
                         </LinkContainer>
-                        <LinkContainer to="/backlog">
-                            <NavItem eventKey={2}>Backlog</NavItem>
-                        </LinkContainer>
-
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

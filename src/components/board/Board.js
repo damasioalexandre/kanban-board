@@ -47,6 +47,14 @@ class Board extends Component {
         this.setState({lanes: newLanes});
     }
 
+    removeCard(cardId) {
+        let cards = this.state.cards.filter(function (card) {
+            return card.id !== cardId;
+        });
+
+        this.setState({cards: cards});
+    }
+
     renderLane(lane, key) {
         return (
             <div key={key}>
