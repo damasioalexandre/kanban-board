@@ -4,6 +4,7 @@
       "id": 1,
       "title": "Card 1",
       "description": "Card 1 Description",
+      "estimate": 5,
       "laneId": 1,
       "users": [
         1,
@@ -14,6 +15,7 @@
       "id": 2,
       "title": "Card 2",
       "description": "Card 2 Description",
+      "estimate": 13,
       "laneId": 2,
       "users": [
         1,
@@ -24,6 +26,7 @@
       "id": 3,
       "title": "Card 3",
       "description": "Card 3 Description",
+      "estimate": 20,
       "laneId": 3,
       "users": [
         1
@@ -34,6 +37,7 @@
       "title": "Card 4",
       "description": "Card 4 Description",
       "laneId": 1,
+      "estimate": 40,
       "users": [
         1
       ]
@@ -42,6 +46,7 @@
       "id": 5,
       "title": "Card 5",
       "description": "Card 5 Description",
+      "estimate": 0,
       "laneId": null,
       "users": [
         1

@@ -37,7 +37,7 @@ class Lane extends Component {
     renderCard(card, key) {
         return (
             <div key={key}>
-                <Card id={card.id} title={card.title} description={card.description} laneId={card.laneId}
+                <Card id={card.id} title={card.title} description={card.description} estimate={card.estimate} laneId={card.laneId}
                       removeCard={this.removeCard}
                       users={card.users} laneTitle={this.props.title}/>
             </div>

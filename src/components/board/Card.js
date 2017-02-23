@@ -110,6 +110,7 @@ Card.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
+    estimate: PropTypes.number.isRequired,
     laneId: PropTypes.number,
     laneTitle: PropTypes.string.isRequired,
     users: PropTypes.array,

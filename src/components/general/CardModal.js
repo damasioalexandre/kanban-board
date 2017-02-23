@@ -82,6 +82,27 @@ class CardModal extends Component {
                                 />
                                 <FormControl.Feedback />
                             </FormGroup>
+                            {/* Estimate */}
+                            <FormGroup controlId="estimate">
+                                <ControlLabel>Estimate</ControlLabel>
+                                <FormControl
+                                    componentClass="select"
+                                    name="estimate"
+                                    value={this.state.card.estimate}
+                                    placeholder="Please select one"
+                                    onChange={this.handleChange}>
+
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="5">5</option>
+                                    <option value="8">8</option>
+                                    <option value="13">13</option>
+                                    <option value="20">20</option>
+                                    <option value="40">40</option>
+                                </FormControl>
+                            </FormGroup>
                             {/* laneId */}
                             <FormGroup controlId="laneId">
                                 <ControlLabel>Lane</ControlLabel>
