@@ -12,8 +12,6 @@ const laneTarget = {
 function collect(connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver(),
-        canDrop: monitor.canDrop()
     };
 }
 
@@ -37,7 +35,8 @@ class Lane extends Component {
     renderCard(card, key) {
         return (
             <div key={key}>
-                <Card id={card.id} title={card.title} description={card.description} estimate={card.estimate} laneId={card.laneId}
+                <Card id={card.id} title={card.title} description={card.description} estimate={card.estimate}
+                      laneId={card.laneId}
                       removeCard={this.removeCard}
                       users={card.users} laneTitle={this.props.title}/>
             </div>
@@ -47,7 +46,7 @@ class Lane extends Component {
     render() {
         // If cards exist then render them
         if (this.state.cards) {
-            const {connectDropTarget, isOver, children} = this.props;
+            const {connectDropTarget} = this.props;
             const cards = [];
             this.state.cards.map(function (card, index) {
                 cards.push(this.renderCard(card, index));
@@ -73,7 +72,6 @@ Lane.propTypes = {
     title: PropTypes.string.isRequired,
     boardId: PropTypes.number.isRequired,
     cards: PropTypes.array,
-    isOver: PropTypes.bool,
     addCard: PropTypes.func.isRequired
 };
 

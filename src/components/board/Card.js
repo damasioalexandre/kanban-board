@@ -48,8 +48,7 @@ const cardSource = {
 
 function collect(connect, monitor) {
     return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging()
+        connectDragSource: connect.dragSource()
     }
 }
 
@@ -91,7 +90,7 @@ class Card extends Component {
     }
 
     render() {
-        const {connectDragSource, isDragging} = this.props;
+        const {connectDragSource} = this.props;
         return connectDragSource(
             <div>
                 <div className="panel kanban-card">
@@ -118,7 +117,6 @@ Card.propTypes = {
 
     /*dnd props*/
     connectDragSource: PropTypes.func.isRequired,
-    isDragging: PropTypes.bool.isRequired
 };
 
 export default DragSource(ItemTypes.CARD, cardSource, collect)(Card);
