@@ -22,11 +22,10 @@ const cardSource = {
         //@TODO fix null + undefined check
         if (source.id && target.lane.id) {
             let data = {
-                "id": 555,
-                "title": props.title,
-                "description": props.description,
-                "laneId": target.lane.id,
-                "users": props.users
+                title: props.title,
+                description: props.description,
+                laneId: target.lane.id,
+                users: props.users
             };
             Jquery.ajax({
                 url: apiUrl + "cards/" + source.id,
@@ -34,14 +33,12 @@ const cardSource = {
                 data: data
             })
                 .done(function (result) {
-
+                    props.removeCard(props.id);
+                    target.lane.addCard(target.lane, source.card);
                 })
                 .fail(function (status) {
                     console.log('error');
                 });
-
-            props.removeCard(props.id);
-            target.lane.addCard(target.lane, source.card);
         }
     },
 };
@@ -93,8 +90,6 @@ class Card extends Component {
 
     updateCard(updatedCard) {
         console.log('ajax');
-
-        updatedCard = JSON.parse(JSON.stringify(updatedCard));
         Jquery.ajax({
             url: apiUrl + "cards/" + this.props.id,
             type: "PUT",
@@ -105,7 +100,7 @@ class Card extends Component {
                 this.setState({showModal: false});
                 this.updateCardState(result);
             }.bind(this))
-            .fail(function (result,status) {
+            .fail(function (result, status) {
                 console.log(result.responseText);
                 console.log('error');
             });

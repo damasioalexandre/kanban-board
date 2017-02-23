@@ -7,7 +7,7 @@ class App extends Component {
         return (
             <div>
                 {/* NavBar */}
-                <NavBar/>
+                {/*<NavBar/>*/}
                 {/* Content */}
                 <div className="container-fluid">
                     {this.props.children}

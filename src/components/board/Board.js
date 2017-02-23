@@ -18,33 +18,38 @@ class Board extends Component {
         this.setAllData();
     }
 
-    setAllData() {
+    setAllData(callback) {
         Jquery.ajax({
             url: apiUrl + "lanes?_embed=cards",
             type: "GET",
             dataType: "json",
         })
             .done(function (result) {
+                this.setState({lanes: null});
                 this.setState({lanes: result});
             }.bind(this))
             .fail(function (status) {
                 console.log('error');
             });
-        /*if (callback) {
-         callback()
-         }*/
+        if (callback) {
+            console.log('calling back');
+            callback()
+        }
     }
 
     addCard(targetLane, card) {
-        /*this.setAllData(function () {}.bind(this));*/
-        let newLanes = this.state.lanes;
-        newLanes.forEach(function (lane) {
-            if (lane.id === targetLane.id) {
-                lane.cards.push(card);
-            }
-        });
+        this.setAllData(function () {
+            console.log('called back');
+            let newLanes = Object.assign([], this.state.lanes);
+            console.log(newLanes);
+            newLanes.forEach(function (lane) {
+                if (lane.id === targetLane.id) {
+                    lane.cards.push(card);
+                }
+            });
 
-        this.setState({lanes: newLanes});
+            this.setState({lanes: newLanes});
+        }.bind(this));
     }
 
     removeCard(cardId) {
@@ -65,6 +70,8 @@ class Board extends Component {
     }
 
     render() {
+        console.log('rendering from board');
+
         if (this.state.lanes) {
             const lanes = [];
             this.state.lanes.map(function (lane, index) {
