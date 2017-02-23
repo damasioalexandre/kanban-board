@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
 import {apiUrl} from '../../constants/api';
 import Jquery from 'jquery';
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import CardModal from '../../components/general/CardModal';
 
 /*components*/
 import Lane from './Lane';
@@ -10,12 +12,35 @@ import Lane from './Lane';
 class Board extends Component {
     constructor(props) {
         super(props);
-        this.state = {lanes: null};
+        let defaultCard = {
+            title: "New Card",
+            description: "",
+            estimate: 0,
+            laneId: 1,
+            users: []
+        };
+        this.state = {
+            lanes: null,
+            showModal: false,
+            defaultCard: defaultCard
+        };
+
+        this.createCard = this.createCard.bind(this);
         this.addCard = this.addCard.bind(this);
+        this.open = this.open.bind(this);
+        this.close = this.close.bind(this);
     }
 
     componentWillMount() {
         this.setAllData();
+    }
+
+    close() {
+        this.setState({showModal: false});
+    }
+
+    open() {
+        this.setState({showModal: true});
     }
 
     setAllData(callback) {
@@ -34,6 +59,22 @@ class Board extends Component {
         if (callback) {
             callback()
         }
+    }
+
+    createCard(newCard) {
+        Jquery.ajax({
+            url: apiUrl + "cards",
+            type: "POST",
+            dataType: "json",
+            data: newCard
+        })
+            .done(function (result) {
+                this.setState({showModal: false});
+                this.addCard(1, result);
+            }.bind(this))
+            .fail(function (result, status) {
+                //@TODO Error logic
+            });
     }
 
     addCard(targetLane, card) {
@@ -74,9 +115,13 @@ class Board extends Component {
             }.bind(this));
             return (
                 <div className="kanban-board">
+                    <Button onClick={this.open}>Add Card</Button>
                     <div className="row">
                         {lanes}
                     </div>
+                    {this.state.showModal ?
+                        <CardModal close={this.close} card={this.state.defaultCard} createCard={this.createCard}
+                                   isPost={true}/> : null}
                 </div>
             );
         }

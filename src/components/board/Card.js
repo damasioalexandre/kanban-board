@@ -1,10 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {ItemTypes} from '../../constants/ItemTypes';
 import {DragSource} from 'react-dnd';
-// @TODO remove these imports
 import Jquery from 'jquery';
 import {apiUrl} from '../../constants/api';
-//
+
 import CardModal from '../../components/general/CardModal';
 
 const cardSource = {
@@ -113,7 +112,7 @@ class Card extends Component {
                     </div>
                 </div>
                 {this.state.showModal ?
-                    <CardModal close={this.close} card={this.state} updateCard={this.updateCard}/> : null}
+                    <CardModal close={this.close} card={this.state} updateCard={this.updateCard} isPost={false}/> : null}
             </div>
         );
     }

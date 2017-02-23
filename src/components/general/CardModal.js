@@ -12,6 +12,7 @@ class CardModal extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleOptionsChange = this.handleOptionsChange.bind(this);
         this.handleCardUpdate = this.handleCardUpdate.bind(this);
+        this.handleCardCreate = this.handleCardCreate.bind(this);
     }
 
     getValidationState() {
@@ -43,15 +44,21 @@ class CardModal extends Component {
     }
 
     handleCardUpdate(event) {
+        console.log("card update");
         event.preventDefault();
         this.props.updateCard(this.state.card);
+    }
+    handleCardCreate(event) {
+        console.log("card create");
+        event.preventDefault();
+        this.props.createCard(this.state.card);
     }
 
     render() {
         return (
             <div>
                 <Modal show={this.state.showModal} onHide={this.props.close}>
-                    <form onSubmit={this.handleCardUpdate}>
+                    <form onSubmit={this.props.isPost ? this.handleCardCreate : this.handleCardUpdate}>
                         <Modal.Header closeButton>
                             <Modal.Title>{this.state.card.title}</Modal.Title>
                         </Modal.Header>
@@ -84,7 +91,7 @@ class CardModal extends Component {
                             </FormGroup>
                             {/* Estimate */}
                             <FormGroup controlId="estimate">
-                                <ControlLabel>Estimate</ControlLabel>
+                                <ControlLabel>Estimate Complexity</ControlLabel>
                                 <FormControl
                                     componentClass="select"
                                     name="estimate"
@@ -132,7 +139,9 @@ class CardModal extends Component {
 CardModal.PropTypes = {
     close: PropTypes.func.isRequired,
     card: PropTypes.array.isRequired,
-    updateCard: PropTypes.func.isrequired
+    updateCard: PropTypes.func,
+    createCard: PropTypes.func,
+    isPost: PropTypes.bool
 };
 
 export default CardModal;
