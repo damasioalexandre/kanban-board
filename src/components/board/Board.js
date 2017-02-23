@@ -108,6 +108,7 @@ class Board extends Component {
     }
 
     render() {
+        console.log(this.state.lanes);
         if (this.state.lanes) {
             const lanes = [];
             this.state.lanes.map(function (lane, index) {
@@ -115,7 +116,7 @@ class Board extends Component {
             }.bind(this));
             return (
                 <div className="kanban-board">
-                    <Button onClick={this.open}>Add Card</Button>
+                    <Button onClick={this.open} bsStyle="success" className="addCardBtn"><span className="glyphicon glyphicon-plus"></span></Button>
                     <div className="row">
                         {lanes}
                     </div>
