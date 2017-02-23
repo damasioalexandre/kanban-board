@@ -37,7 +37,7 @@ const cardSource = {
                     target.lane.addCard(target.lane, source.card);
                 })
                 .fail(function (status) {
-                    console.log('error');
+                    //@TODO Error handling
                 });
         }
     },
@@ -76,7 +76,6 @@ class Card extends Component {
     }
 
     updateCardState(card) {
-        console.log('running this');
         this.setState({
             showModal: false,
             title: card.title,
@@ -89,7 +88,6 @@ class Card extends Component {
     }
 
     updateCard(updatedCard) {
-        console.log('ajax');
         Jquery.ajax({
             url: apiUrl + "cards/" + this.props.id,
             type: "PUT",
@@ -101,8 +99,7 @@ class Card extends Component {
                 this.updateCardState(result);
             }.bind(this))
             .fail(function (result, status) {
-                console.log(result.responseText);
-                console.log('error');
+               //@TODO Error logic
             });
     }
 

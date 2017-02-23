@@ -29,19 +29,16 @@ class Board extends Component {
                 this.setState({lanes: result});
             }.bind(this))
             .fail(function (status) {
-                console.log('error');
+                //@TODO Error handling
             });
         if (callback) {
-            console.log('calling back');
             callback()
         }
     }
 
     addCard(targetLane, card) {
         this.setAllData(function () {
-            console.log('called back');
             let newLanes = Object.assign([], this.state.lanes);
-            console.log(newLanes);
             newLanes.forEach(function (lane) {
                 if (lane.id === targetLane.id) {
                     lane.cards.push(card);
@@ -70,8 +67,6 @@ class Board extends Component {
     }
 
     render() {
-        console.log('rendering from board');
-
         if (this.state.lanes) {
             const lanes = [];
             this.state.lanes.map(function (lane, index) {

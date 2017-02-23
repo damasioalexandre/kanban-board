@@ -118,11 +118,9 @@ class CardModal extends Component {
                                     <option value="3">User 3</option>
                                 </FormControl>
                             </FormGroup>
-
-
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button type="submit">Update</Button>
+                            <Button type="submit" bsStyle="primary">Submit</Button>
                         </Modal.Footer>
                     </form>
                 </Modal>
