@@ -16,10 +16,11 @@ class CardModal extends Component {
     }
 
     getValidationState() {
-        const length = this.state.card.title.length;
+        /*const length = this.state.card.title.length;
         if (length > 10) return 'success';
         else if (length > 3) return 'warning';
-        else if (length > 0) return 'error';
+
+        else if (length > 0) return 'error';*/
     }
 
     handleOptionsChange(event) {
