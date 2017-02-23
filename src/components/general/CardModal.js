@@ -24,11 +24,11 @@ class CardModal extends Component {
     handleOptionsChange(event) {
         let target = event.target;
         let options = target.options;
-        let newCard = JSON.parse(JSON.stringify(this.state.card));
+        let newCard = this.state.card;
         let newOptions = [];
         for (let i = 0, l = options.length; i < l; i++) {
             if (options[i].selected) {
-                newOptions.push(options[i].value);
+                newOptions.push(parseInt(options[i].value));
             }
         }
         newCard[target.name] = newOptions;
@@ -51,11 +51,11 @@ class CardModal extends Component {
         return (
             <div>
                 <Modal show={this.state.showModal} onHide={this.props.close}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>{this.state.card.title}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <form onSubmit={this.handleCardUpdate}>
+                    <form onSubmit={this.handleCardUpdate}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>{this.state.card.title}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
                             {/* Title */}
                             <FormGroup controlId="title"
                                        validationState={this.getValidationState()}>
@@ -103,21 +103,7 @@ class CardModal extends Component {
                                     <option value="40">40</option>
                                 </FormControl>
                             </FormGroup>
-                            {/* laneId */}
-                            <FormGroup controlId="laneId">
-                                <ControlLabel>Lane</ControlLabel>
-                                <FormControl
-                                    componentClass="select"
-                                    name="laneId"
-                                    value={this.state.card.laneId}
-                                    placeholder="Please select one"
-                                    onChange={this.handleChange}>
 
-                                    <option value="1">To Do</option>
-                                    <option value="2">In Progress</option>
-                                    <option value="2">Done</option>
-                                </FormControl>
-                            </FormGroup>
                             {/* users */}
                             <FormGroup controlId="users">
                                 <ControlLabel>Lane</ControlLabel>
@@ -132,12 +118,13 @@ class CardModal extends Component {
                                     <option value="3">User 3</option>
                                 </FormControl>
                             </FormGroup>
+
+
+                        </Modal.Body>
+                        <Modal.Footer>
                             <Button type="submit">Update</Button>
-                        </form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.props.close}>Close</Button>
-                    </Modal.Footer>
+                        </Modal.Footer>
+                    </form>
                 </Modal>
             </div>
         )

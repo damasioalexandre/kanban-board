@@ -55,10 +55,19 @@ function collect(connect, monitor) {
 class Card extends Component {
     constructor(props) {
         super(props);
-        this.state = {showModal: false};
+        this.state = {
+            showModal: false,
+            title: props.title,
+            description: props.description,
+            estimate: props.estimate,
+            laneId: props.laneId,
+            laneTitle: props.laneTitle,
+            users: props.users
+        };
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
         this.updateCard = this.updateCard.bind(this);
+        this.updateCardState = this.updateCardState.bind(this);
     }
 
     close() {
@@ -69,11 +78,23 @@ class Card extends Component {
         this.setState({showModal: true});
     }
 
-    /*updateCardProps(card) {
-
-    }*/
+    updateCardState(card) {
+        console.log('running this');
+        this.setState({
+            showModal: false,
+            title: card.title,
+            description: card.description,
+            estimate: card.estimate,
+            laneId: card.laneId,
+            laneTitle: card.laneTitle,
+            users: card.users
+        });
+    }
 
     updateCard(updatedCard) {
+        console.log('ajax');
+
+        updatedCard = JSON.parse(JSON.stringify(updatedCard));
         Jquery.ajax({
             url: apiUrl + "cards/" + this.props.id,
             type: "PUT",
@@ -82,10 +103,11 @@ class Card extends Component {
         })
             .done(function (result) {
                 this.setState({showModal: false});
-                /*this.updateCardProps(result);*/
+                this.updateCardState(result);
             }.bind(this))
-            .fail(function (status) {
-
+            .fail(function (result,status) {
+                console.log(result.responseText);
+                console.log('error');
             });
     }
 
@@ -95,11 +117,11 @@ class Card extends Component {
             <div>
                 <div className="panel kanban-card">
                     <div className="panel-body" onClick={this.open}>
-                        {this.props.title}
+                        {this.state.title}
                     </div>
                 </div>
                 {this.state.showModal ?
-                    <CardModal close={this.close} card={this.props} updateCard={this.updateCard}/> : null}
+                    <CardModal close={this.close} card={this.state} updateCard={this.updateCard}/> : null}
             </div>
         );
     }
