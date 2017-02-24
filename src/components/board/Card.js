@@ -18,26 +18,27 @@ const cardSource = {
     endDrag(props, monitor) {
         const source = monitor.getItem();
         const target = monitor.getDropResult();
-        //@TODO fix null + undefined check
-        if (source.id && target.lane.id) {
-            let data = {
-                title: props.title,
-                description: props.description,
-                laneId: target.lane.id,
-                users: props.users
-            };
-            Jquery.ajax({
-                url: apiUrl + "cards/" + source.id,
-                type: "PATCH",
-                data: data
-            })
-                .done(function (result) {
-                    props.removeCard(props.id);
-                    target.lane.addCard(target.lane, source.card);
+        if (source && target) {
+            if (source.id && target.lane.id) {
+                let data = {
+                    title: props.title,
+                    description: props.description,
+                    laneId: target.lane.id,
+                    users: props.users
+                };
+                Jquery.ajax({
+                    url: apiUrl + "cards/" + source.id,
+                    type: "PATCH",
+                    data: data
                 })
-                .fail(function (status) {
-                    //@TODO Error handling
-                });
+                    .done(function (result) {
+                        props.removeCard(props.id);
+                        target.lane.addCard(target.lane, source.card);
+                    })
+                    .fail(function (status) {
+                        //@TODO Error handling
+                    });
+            }
         }
     },
 };
@@ -98,7 +99,7 @@ class Card extends Component {
                 this.updateCardState(result);
             }.bind(this))
             .fail(function (result, status) {
-               //@TODO Error logic
+                //@TODO Error logic
             });
     }
 
@@ -112,7 +113,8 @@ class Card extends Component {
                     </div>
                 </div>
                 {this.state.showModal ?
-                    <CardModal close={this.close} card={this.state} updateCard={this.updateCard} isPost={false}/> : null}
+                    <CardModal close={this.close} card={this.state} updateCard={this.updateCard}
+                               isPost={false}/> : null}
             </div>
         );
     }
