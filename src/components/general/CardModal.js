@@ -45,12 +45,10 @@ class CardModal extends Component {
     }
 
     handleCardUpdate(event) {
-        console.log("card update");
         event.preventDefault();
         this.props.updateCard(this.state.card);
     }
     handleCardCreate(event) {
-        console.log("card create");
         event.preventDefault();
         this.props.createCard(this.state.card);
     }

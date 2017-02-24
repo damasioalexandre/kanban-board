@@ -108,7 +108,6 @@ class Board extends Component {
     }
 
     render() {
-        console.log(this.state.lanes);
         if (this.state.lanes) {
             const lanes = [];
             this.state.lanes.map(function (lane, index) {
