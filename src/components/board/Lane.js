@@ -52,7 +52,7 @@ class Lane extends Component {
                 cards.push(this.renderCard(card, index));
             }.bind(this));
             return connectDropTarget(
-                <div className="kanban-lane col-md-3 col-sm-3 col-xs-3">
+                <div className="kanban-lane col-md-3 col-sm-3">
                     <div className="panel panel-default">
                         <div className="panel-heading">
                             <h4 className="panel-title">{this.props.title}</h4>
