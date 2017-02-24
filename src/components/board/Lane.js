@@ -23,6 +23,21 @@ class Lane extends Component {
             cards: props.cards
         };
         this.removeCard = this.removeCard.bind(this);
+        this.updateLaneCardState = this.updateLaneCardState.bind(this);
+    }
+
+    updateLaneCardState(updatedCard) {
+        if (updatedCard) {
+            let newCards = Object.assign([], this.state.cards);
+
+            newCards.forEach(function (card, key) {
+                if (card.id === updatedCard.id) {
+                    newCards[key] = updatedCard;
+                }
+            });
+
+            this.setState({cards: newCards});
+        }
     }
 
     removeCard(cardId) {
@@ -38,7 +53,8 @@ class Lane extends Component {
                 <Card id={card.id} title={card.title} description={card.description} estimate={card.estimate}
                       laneId={card.laneId}
                       removeCard={this.removeCard}
-                      users={card.users} laneTitle={this.props.title}/>
+                      users={card.users} laneTitle={this.props.title}
+                      updateLaneCardState={this.updateLaneCardState}/>
             </div>
         )
     }
@@ -72,7 +88,7 @@ Lane.propTypes = {
     title: PropTypes.string.isRequired,
     boardId: PropTypes.number.isRequired,
     cards: PropTypes.array,
-    addCard: PropTypes.func.isRequired
+    addCard: PropTypes.func.isRequired,
 };
 
 export default DropTarget(ItemTypes.CARD, laneTarget, collect)(Lane);

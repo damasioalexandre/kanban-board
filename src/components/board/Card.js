@@ -85,6 +85,8 @@ class Card extends Component {
             laneTitle: card.laneTitle,
             users: card.users
         });
+
+        this.props.updateLaneCardState(card);
     }
 
     updateCard(updatedCard) {
@@ -129,6 +131,7 @@ Card.propTypes = {
     laneTitle: PropTypes.string.isRequired,
     users: PropTypes.array,
     removeCard: PropTypes.func.isRequired,
+    updateLaneCardState: PropTypes.func.isRequired,
 
     /*dnd props*/
     connectDragSource: PropTypes.func.isRequired,
